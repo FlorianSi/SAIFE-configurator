@@ -6,6 +6,8 @@
 
 **Outcome:** A highly secure, GDPR-compliant AI tutor. The model is deterministically constrained to act as a Socratic guide (refusing ghostwriting), reject emotional bonding, halt dialogue during psychological crises to refer students to official helplines, and run entirely locally within the browser with zero data transmission.
 
+<img width="900" alt="SAIFE-Screen" src="https://github.com/user-attachments/assets/1b4bb681-12f4-489f-94cc-d731810da8e8" />
+
 ---
 
 ## What does this tool do?
