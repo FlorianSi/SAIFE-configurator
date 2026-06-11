@@ -20,6 +20,11 @@ export default function AboutPage({ lang, onBack }) {
       </section>
 
       <section className="about-section">
+        <h2>{s.aboutSafetyTitle}</h2>
+        <p style={{ whiteSpace: 'pre-line' }}>{s.aboutSafetyText}</p>
+      </section>
+
+      <section className="about-section">
         <h2>{s.aboutSourcesTitle}</h2>
         <p>{s.aboutSourcesText}</p>
 
