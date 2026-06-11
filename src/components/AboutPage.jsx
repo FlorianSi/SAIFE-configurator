@@ -20,6 +20,11 @@ export default function AboutPage({ lang, onBack }) {
       </section>
 
       <section className="about-section">
+        <h2>{s.aboutIntentTitle}</h2>
+        <p>{s.aboutIntentText}</p>
+      </section>
+
+      <section className="about-section">
         <h2>{s.aboutSafetyTitle}</h2>
         <p style={{ whiteSpace: 'pre-line' }}>{s.aboutSafetyText}</p>
       </section>
@@ -38,7 +43,7 @@ export default function AboutPage({ lang, onBack }) {
                 </p>
                 <ul className="source-citations">
                   {data.citations.map((citation, idx) => (
-                    <li key={idx} dangerouslySetInnerHTML={{ __html: citation }} />
+                    <li key={idx}>{citation}</li>
                   ))}
                 </ul>
               </div>

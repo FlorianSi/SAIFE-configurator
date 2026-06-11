@@ -61,7 +61,14 @@ A complete list of all underlying primary sources (papers and legal guidelines) 
 
 This project was developed using an AI-assisted workflow. While the UX/UI design and the overall architectural decisions were human-developed, the underlying code implementation, the literature research of educational papers, and the abstraction of psychological findings into deterministic prompt engineering rules were created with extensive assistance from artificial intelligence. 
 
-This transparent approach aims to demonstrate how AI systems can be effectively leveraged to build safer and more ethical tools for the educational sector.
+This transparent approach aims to demonstrate how AI systems can be leveraged to build safer and more ethical tools for the educational sector.
+
+---
+
+## Intention & Support for Teachers
+
+This project was created with the sincere intention of supporting educators. Manually configuring an AI chatbot to be safe, pedagogically effective, and legally compliant is an incredibly complex task, requiring expertise in prompt engineering, child psychology, and GDPR guidelines. By automated generation of verified, curriculum-aligned system prompts, this tool aims to alleviate this technical burden, helping teachers deploy safe AI companions in their classrooms with confidence and ease.
+
 
 ---
 

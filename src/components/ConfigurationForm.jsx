@@ -121,7 +121,6 @@ export default function ConfigurationForm({ config, onConfigChange, lang, onFiel
             onChange={(e) => update('personaName', e.target.value)}
             placeholder={s.personaNamePlaceholder}
             maxLength={60}
-            autoFocus
           />
         </div>
       )}

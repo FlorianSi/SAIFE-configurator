@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react';
-import './index.css';
+import { useState, useMemo, useEffect } from 'react';
 import ConfigurationForm from './components/ConfigurationForm.jsx';
 import PromptPreview from './components/PromptPreview.jsx';
+import AboutPage from './components/AboutPage.jsx';
 import { strings } from './utils/i18n.js';
 import { generatePrompt } from './utils/promptGenerator.js';
 
@@ -28,13 +28,16 @@ const DEFAULT_CONFIG = {
   personaName: '',
 };
 
-import AboutPage from './components/AboutPage.jsx';
-
 export default function App() {
   const [lang, setLang] = useState('de');
   const [config, setConfig] = useState(DEFAULT_CONFIG);
   const [activeField, setActiveField] = useState(null);
   const [currentPage, setCurrentPage] = useState('configurator');
+
+  // Sync the <html lang> attribute so screen readers use the correct phonetics
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const s = strings[lang];
 
@@ -108,13 +111,18 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="footer">
-        {s.footer}{' '}
-        <button 
-          className="footer-link-btn" 
-          onClick={() => setCurrentPage('about')}
-        >
-          {s.footerLink}
-        </button>
+        <div>
+          {s.footer}{' '}
+          <button 
+            className="footer-link-btn" 
+            onClick={() => setCurrentPage('about')}
+          >
+            {s.footerLink}
+          </button>
+        </div>
+        <div className="footer-credits">
+          Made with ♥️ in Potsdam
+        </div>
       </footer>
     </div>
   );

@@ -30,7 +30,9 @@ export default function PromptPreview({ promptText, promptChunks, config, lang, 
   }, [activeField, promptChunks]);
 
   const charCount = promptText?.length ?? 0;
-  const tokenEstimate = Math.round(charCount / 4);
+  // German compound words + umlauts yield more tokens per character than English
+  const charsPerToken = lang === 'de' ? 3.3 : 4;
+  const tokenEstimate = Math.round(charCount / charsPerToken);
 
   async function handleCopy() {
     if (!promptText) return;
