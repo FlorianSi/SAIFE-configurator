@@ -1,0 +1,652 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg-primary: #3B3B3B;
+  --bg-secondary: #333333;
+  --bg-panel: #2F2F2F;
+  --bg-input: #343434;
+  --bg-hover: #454545;
+
+  --text-primary: #F2EBD5;
+  --text-secondary: #96958E;
+  --text-muted: #7a7974;
+  --text-dim: #5a5955;
+
+  --accent: #F28A2E;
+  --accent-dim: #4a3520;
+  --accent-glow: rgba(242, 138, 46, 0.08);
+
+  --border: #4a4a4a;
+  --border-accent: #6a5540;
+  --border-active: #F2A766;
+
+  --danger: #E66A55;
+  --danger-dim: rgba(230, 106, 85, 0.15);
+
+  /* Header height used for offset calculations */
+  --header-h: 72px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+}
+
+/* ─── DOCUMENT FLOW: page scrolls normally ─── */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+.header {
+  height: var(--header-h);
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Sticky so it stays visible while scrolling on mobile */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.header-title span {
+  color: var(--accent);
+}
+
+.header-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.subtitle-letter {
+  color: var(--accent);
+}
+
+.lang-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lang-toggle button {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.lang-toggle button:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.lang-toggle button.active {
+  background: var(--accent-dim);
+  border-color: var(--border-active);
+  color: var(--accent);
+}
+
+/* ─── MAIN: two-pane layout ─── */
+.main {
+  flex: 1;
+  display: grid;
+  /*
+   * Desktop: fixed 360px config column + fluid preview column.
+   * Both columns are aligned to the TOP of the grid row.
+   * Only the preview panel scrolls internally.
+   */
+  grid-template-columns: 360px 1fr;
+  align-items: start;        /* columns align to top, not stretch */
+  gap: 1.5rem;
+  padding: 1.5rem 2rem 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ─── CONFIGURATION PANEL ─── */
+/*
+ * Natural document height — grows with its content.
+ * overflow: visible so tooltips are never clipped.
+ */
+.config-panel {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  overflow: visible;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.config-section-title {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+/* ─── FORM FIELDS ─── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.field-label.optional::after {
+  content: ' (optional)';
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+select, input[type="text"] {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 0.6rem 0.8rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+select:focus, input[type="text"]:focus {
+  border-color: var(--border-active);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ─── SLIDER ─── */
+.slider-container {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  padding: 0.8rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 1px;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 1px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: -7px;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.slider-value {
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-align: center;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+/* ─── SAFETY BADGE ─── */
+.safety-badge {
+  display: flex;
+  gap: 0.8rem;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border);
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  line-height: 1.4;
+  align-items: flex-start;
+}
+
+.safety-badge-icon {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ─── PREVIEW PANEL ─── */
+/*
+ * On desktop: sticky below the header, max-height fills remaining viewport.
+ * Only .preview-content scrolls internally.
+ * On mobile: static, no height cap.
+ */
+.preview-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Sticky + viewport-fill: panel stays on screen while config scrolls past */
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+  max-height: calc(100vh - var(--header-h) - 3rem);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.preview-title {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.preview-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.preview-actions button {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.preview-actions button:hover:not(:disabled) {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-accent);
+}
+
+.preview-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.preview-actions button.success {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: var(--border-active);
+}
+
+/* The only scrollable element */
+.preview-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: var(--bg-primary);
+  min-height: 0;
+}
+
+.preview-footer {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--bg-panel);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.char-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ─── PROMPT CHUNKS ─── */
+.prompt-chunks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.prompt-chunk {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prompt-chunk.highlighted {
+  background-color: var(--accent-glow);
+  border-color: var(--border-active);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.preview-empty {
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* ─── FOOTER ─── */
+/* Normal document flow — appears at the end of the page */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  margin-top: auto;
+}
+
+/* ─── REF TOOLTIP ─── */
+.ref-tooltip-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.ref-btn {
+  background: none;
+  border: none;
+  color: var(--border-active);
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.ref-btn:hover {
+  color: var(--accent);
+}
+
+/* Tooltip is positioned via inline style (position: fixed) in the component.
+   These rules handle appearance only. */
+.ref-tooltip {
+  width: 320px;
+  max-height: 380px;
+  overflow-y: auto;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-accent);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 9999;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.ref-tooltip p {
+  margin-bottom: 0.8rem;
+}
+
+.ref-tooltip p:last-child {
+  margin-bottom: 0;
+}
+
+.ref-cite {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ─── RESPONSIVE: single-column mobile ─── */
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+    padding: 1rem 1rem 2rem;
+    /* Restore normal stacking */
+    align-items: stretch;
+  }
+
+  /* Remove sticky preview on mobile — everything flows naturally */
+  .preview-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .preview-content {
+    overflow-y: visible;
+    min-height: auto;
+    /* Give the content area a reasonable height on mobile */
+    min-height: 400px;
+  }
+
+  .header {
+    position: static; /* No sticky header on mobile to save space */
+    height: auto;
+    padding: 1rem;
+  }
+}
+
+/* ─── ABOUT PAGE ─── */
+.about-page {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+.about-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.about-title {
+  font-size: 2rem;
+  color: var(--text);
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-section h2 {
+  font-size: 1.25rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.about-section p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.sources-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.source-item {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.source-concept {
+  margin: 0 0 0.75rem 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.source-citations {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.source-citations li {
+  margin-bottom: 0.5rem;
+}
+
+.source-citations li:last-child {
+  margin-bottom: 0;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border-color: var(--border-hover);
+}
+
+.footer-link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  margin-left: 0.25rem;
+  transition: color 0.2s;
+}
+
+.footer-link-btn:hover {
+  color: var(--text);
+}
+
+.main.single-pane {
+  display: block;
+}
