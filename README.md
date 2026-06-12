@@ -2,7 +2,7 @@
 
 **Problem:** Deploying generic AI chatbots in classrooms exposes students to severe risks: cognitive offloading (ghostwriting), age-inappropriate language, and psychological threats like parasocial bonding or unhandled mental health crises. Additionally, standard AI tools typically violate strict data protection laws (GDPR/DSGVO) and child protection regulations (especially in Europe/Germany) by storing and tracking student data.
 
-**Solution:** The SAIFE Configurator generates specialized, curriculum-compliant system prompts that transform standard Large Language Models (LLMs) into safe, Socratic learning companions.
+**Solution:** The [The SAIFE Configurator](https://saife-configurator.vercel.app/) generates specialized, curriculum-compliant system prompts that transform standard Large Language Models (LLMs) into safe, Socratic learning companions.
 
 **Outcome:** A highly secure, GDPR-compliant AI tutor. The model is deterministically constrained to act as a Socratic guide (refusing ghostwriting), reject emotional bonding, halt dialogue during psychological crises to refer students to official helplines, and run entirely locally within the browser with zero data transmission.
 
