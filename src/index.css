@@ -90,6 +90,31 @@ body {
   color: var(--accent);
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: color 0.2s, transform 0.2s;
+  padding: 0.4rem;
+  border-radius: 4px;
+}
+
+.github-link:hover {
+  color: var(--text-primary);
+  transform: scale(1.08);
+}
+
+.github-link:active {
+  transform: scale(0.95);
+}
+
 .lang-toggle {
   display: flex;
   gap: 0.5rem;
