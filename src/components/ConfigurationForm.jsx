@@ -134,14 +134,23 @@ export default function ConfigurationForm({ config, onConfigChange, lang, onFiel
           <ReferenceTooltip refKey="socraticMethod" lang={lang} />
         </div>
         <div className="slider-container">
-          <input
-            id="slider-socrates"
-            type="range"
-            min={SOCRATES_MIN}
-            max={SOCRATES_MAX}
-            value={config.socratesLevel}
-            onChange={(e) => update('socratesLevel', Number(e.target.value))}
-          />
+          <div className="slider-wrapper">
+            <div className="slider-ticks" aria-hidden="true">
+              <span className="tick"></span>
+              <span className="tick"></span>
+              <span className="tick"></span>
+              <span className="tick"></span>
+              <span className="tick"></span>
+            </div>
+            <input
+              id="slider-socrates"
+              type="range"
+              min={SOCRATES_MIN}
+              max={SOCRATES_MAX}
+              value={config.socratesLevel}
+              onChange={(e) => update('socratesLevel', Number(e.target.value))}
+            />
+          </div>
           <div className="slider-labels">
             <span>{lang === 'de' ? 'Direkte Hilfe' : 'Direct help'}</span>
             <span>{lang === 'de' ? 'Nur Fragen' : 'Questions only'}</span>
